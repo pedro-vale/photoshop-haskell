@@ -2,7 +2,10 @@
 Working with images using haskell language
 
 # Compile
-ghc --make p_fc51796.hs -o photocop
+ghc --make main.hs -o photoshop
 
 # Running tests
 $ ./run.sh
+
+# Running quickCheck
+$ ./photoshop -t
