@@ -1,4 +1,4 @@
-# Photochop_haskell
+# Photoshop_haskell
 Working with images using haskell language
 
 # Compile
