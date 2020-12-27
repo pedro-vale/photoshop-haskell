@@ -4,7 +4,6 @@ import Data.List
 
 main :: IO ()
 main = do
-  -- receber argumentos
   args <- getArgs
 
   if head args == "-t"

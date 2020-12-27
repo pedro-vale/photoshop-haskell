@@ -29,14 +29,14 @@ applyChanges :: Photo a -> String -> Photo a
 applyChanges (Photo t w h mx p) n = (Photo t wx hx mx px)
   where px = concat $ map (\x -> prepare n x) xs
         xs = case n of
-          "-fh" -> flipHorizontal w p -- flipHorizontal
-          "-fv" -> flipVertical w p   -- flipVertical
-          "-gs" -> applyColor w n p   -- grayscale
-          "-rc" -> applyColor w n p   -- redscale
-          "-bc" -> applyColor w n p   -- bluescale
-          "-gc" -> applyColor w n p   -- greenscale
-          "-hw" -> halfWidth w p      --halfWidth
-          "-hh" -> halfHeight w p     --halfHeight
+          "-fh" -> flipHorizontal w p
+          "-fv" -> flipVertical w p
+          "-gs" -> applyColor w n p
+          "-rc" -> applyColor w n p
+          "-bc" -> applyColor w n p
+          "-gc" -> applyColor w n p
+          "-hw" -> halfWidth w p
+          "-hh" -> halfHeight w p
         wx = if n == "-hw"
               then (div w 2)
               else w
@@ -51,19 +51,19 @@ mountOutput (Photo t w h mx p) =
   where
     fPixels = map show p
 
--- prepara linhas
+-- prepare rows
 prepare :: String -> [[Int]] -> [Int]
 prepare n zs
       | n == "-fh" = (concat . reverse) zs
       | otherwise = concat zs
 
--- realiza os split em w linhas
+-- split into w rows
 splitLines :: Int -> [[Int]] -> [[[Int]]]
 splitLines _ [] = []
 splitLines w xs = fst s : splitLines w (snd s)
   where s = splitAt w xs
 
--- decompõe em lista em inteiros xs -> [r,g,b]
+-- decompose the list into list of integers [r, g, b]
 decompor :: [Int] -> [[Int]]
 decompor [] = []
 decompor xs = (take 3 xs)  : (decompor (drop 3 xs))
@@ -107,13 +107,12 @@ halfHeight w p = applyHalfHeight [x | x <- ((splitLines w .decompor) p)]
 
 applyHalfHeight :: [[[Int]]] -> [[[Int]]]
 applyHalfHeight [] = []
-applyHalfHeight (x1:x2:xs) = mergeLines x1 x2 : applyHalfHeight xs --x1 e x2 são linhas. Merge x1 x2
+applyHalfHeight (x1:x2:xs) = mergeLines x1 x2 : applyHalfHeight xs --x1 and x2 are rows. Merge x1 x2
 
 mergeLines :: [[Int]] -> [[Int]] -> [[Int]]
 mergeLines x1 x2 = [ zipWith (\a b -> div (a+b) 2) x y | (x,y) <- zip x1 x2 ]
 
-
------ Corre testes -----
+----- Run tests -----
 runTests = do
   quickCheck prop_2flipsH_equal
   quickCheck prop_2flipsV_equal
@@ -121,13 +120,14 @@ runTests = do
   quickCheck prop_maxvalue_pixel
   quickCheck prop_same_ratio
 
------ QuickCheck testes -----
+----- Define properties for QuickCheck -----
+
 prop_2flipsH_equal :: Photo a -> Property
 prop_2flipsH_equal (Photo t w h m p) =
   w > 0 && (mod w 3 == 0) && h > 0 ==>
   (Photo t w h m p) == (foldl (\acc f -> applyChanges acc f) (Photo t w h m p) ["-fh","-fh"])
 
--- Não muito satisfatório. Investigar motivo.
+-- Results are not good. Investigate
 prop_2flipsV_equal :: Photo a -> Property
 prop_2flipsV_equal (Photo t w h m p) =
   w > 0 && (mod w 3 == 0) && h > 2 && even h ==>

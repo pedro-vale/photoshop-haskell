@@ -2,12 +2,12 @@ name:                photoshop-haskell
 version:             0.1.0.0
 -- synopsis:
 -- description:
-homepage:            https://github.com/githubuser/photoshop-haskell#readme
+homepage:            https://github.com/pedro-vale/photoshop_haskell#readme
 license:             BSD3
 license-file:        LICENSE
-author:              Pedro
+author:              Pedro Vale
 maintainer:          pvale94@gmail.com
-copyright:           2020 Pedro
+copyright:           2020 Pedro Vale
 category:            Web
 build-type:          Simple
 cabal-version:       >=1.10
