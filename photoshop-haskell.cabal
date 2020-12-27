@@ -1,0 +1,22 @@
+name:                photoshop-haskell
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/pedro-vale/photoshop_haskell#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Pedro Vale
+maintainer:          pvale94@gmail.com
+copyright:           2020 Pedro Vale
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.10
+extra-source-files:  README.md
+
+executable photoshop-haskell
+  hs-source-dirs:      src
+  main-is:             Main.hs
+  other-modules:       Foto
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5, QuickCheck
+  ghc-options:         -Wall
