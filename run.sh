@@ -1,9 +1,9 @@
-#!/bin/zsh
-./photoshop lena.ppm lenaVertical.ppm -fv
-./photoshop lena.ppm lenaHorizontalVertical.ppm -fv -fh
-./photoshop lena.ppm lenaHorizontal.ppm -fh
-./photoshop lena.ppm lenaCinza.ppm -gs
-./photoshop lena.ppm lenaVermelho.ppm -rc
-./photoshop lena.ppm lenaAzul.ppm -bc
-./photoshop lena.ppm lenaVerde.ppm -gc
-./photoshop lena.ppm lenaPDF.ppm -fh -fv -hw -hh -gs
+#!/bin/bash
+stack run -- "./assets/lena.ppm" "lenaVertical.ppm" "-fv"
+# stack run lenaHorizontalVertical.ppm -fv -fh
+# stack run lenaHorizontal.ppm -fh
+# stack run lenaCinza.ppm -gs
+# stack run lenaVermelho.ppm -rc
+# stack run lenaAzul.ppm -bc
+# stack run lenaVerde.ppm -gc
+# stack run lenaPDF.ppm -fh -fv -hw -hh -gs
